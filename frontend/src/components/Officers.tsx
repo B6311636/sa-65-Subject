@@ -6,15 +6,33 @@ import Container from "@mui/material/Container";
 import Box from "@mui/material/Box";
 import { OfficersInterface } from "../models/IOfficer";
 import { DataGrid, GridColDef } from "@mui/x-data-grid";
-import { GetOfficers } from "../services/HttpClientService";
 function Officers() {
     const [officers, setOfficers] = useState<OfficersInterface[]>([]);
 
+    const apiUrl = "http://localhost:8080/officers";
+
+    useEffect(() => {
+        getOfficers();
+    }, []);
+
     const getOfficers = async () => {
-        let res = await GetOfficers();
-        if (res) {
-            setOfficers(res);
-        }
+        const requestOptions = {
+            method: "GET",
+            headers: {
+                Authorization: `Bearer ${localStorage.getItem("token")}`,
+                "Content-Type": "application/json",
+            },
+        };
+    
+        fetch(apiUrl, requestOptions)
+            .then((response) => response.json())
+            .then((res) => {
+                if (res.data) {
+                    return setOfficers(res.data);
+                } else {
+                    return false;
+                }
+            });
     };
 
     const columns: GridColDef[] = [
@@ -23,36 +41,17 @@ function Officers() {
         { field: "Email", headerName: "อีเมล", width: 400 },
     ];
 
-    useEffect(() => {
-        getOfficers();
-    }, []);
-
     return (
         <div>
             <Container maxWidth="md">
-                <Box
-                    display="flex"
-                    sx={{
-                        marginTop: 2,
-                    }}
-                >
+                <Box display="flex" sx={{marginTop: 2,}}>
                     <Box flexGrow={1}>
-                        <Typography
-                            component="h2"
-                            variant="h6"
-                            color="primary"
-                            gutterBottom
-                        >
+                        <Typography component="h2" variant="h6" color="primary" gutterBottom>
                             ข้อมูลสมาชิกผู้ดูแลระบบ
                         </Typography>
                     </Box>
                     <Box>
-                        <Button
-                            component={RouterLink}
-                            to="/officer/create"
-                            variant="contained"
-                            color="primary"
-                        >
+                        <Button component={RouterLink} to="/officer/create" variant="contained" color="primary">
                             สร้างข้อมูล
                         </Button>
                     </Box>

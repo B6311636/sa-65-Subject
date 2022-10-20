@@ -31,7 +31,7 @@ async function GetSubjects() {
     const requestOptions = {
         method: "GET",
         headers: {
-            // Authorization: `Bearer ${localStorage.getItem("token")}`,
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
             "Content-Type": "application/json"
         },
     };
@@ -48,32 +48,6 @@ async function GetSubjects() {
 
     return res;
 }
-
-// async function GetOfficerByUID() {
-//     let uid = localStorage.getItem("id");
-//     const requestOptions = {
-//         method: "GET",
-//         headers: {
-//             Authorization: `Bearer ${localStorage.getItem("token")}`,
-//             "Content-Type": "application/json",
-//         },
-//     };
-
-//     let res = await fetch(
-//         `${apiUrl}/officers/${uid}`,
-//         requestOptions
-//     )
-//         .then((response) => response.json())
-//         .then((res) => {
-//             if (res.data) {
-//                 return res.data;
-//             } else {
-//                 return false;
-//             }
-//         });
-
-//     return res;
-// }
 
 async function GetOfficers() {
     const requestOptions = {
@@ -163,16 +137,40 @@ async function GetTime() {
     return res;
 }
 
+async function GetOfficerByUID() {
+    let uid = localStorage.getItem("uid");
+    const requestOptions = {
+        method: "GET",
+        headers: {
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+            "Content-Type": "application/json",
+        },
+    };
+
+    let res = await fetch(`${apiUrl}/officer/${uid}`, requestOptions)
+        .then((response) => response.json())
+        .then((res) => {
+            if (res.data) {
+                return res.data;
+            } else {
+                return false;
+            }
+        });
+
+    return res;
+}
+
 async function CreateOfficer(data: OfficersInterface) {
     const requestOptions = {
         method: "POST",
         headers: {
-            "Content-Type": "application/json"
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+            "Content-Type": "application/json",
         },
         body: JSON.stringify(data),
     };
 
-    let res = await fetch(`${apiUrl}/officers`, requestOptions)
+    let res = await fetch(`${apiUrl}/officers/create`, requestOptions)
         .then((response) => response.json())
         .then((res) => {
             if (res.data) {
@@ -217,5 +215,5 @@ export {
     GetTime,
     CreateOfficer,
     Subjects,
-    // GetOfficerByUID,
+    GetOfficerByUID,
 };

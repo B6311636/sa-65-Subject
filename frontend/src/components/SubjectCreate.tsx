@@ -20,11 +20,10 @@ import { TeachersInterface } from "../models/ITeacher";
 import { TimesInterface } from "../models/ITime";
 
 import {
-    GetOfficers,
     GetTeachers,
     GetFaculty,
     GetTime,
-    // GetOfficerByUID,
+    GetOfficerByUID,
     Subjects,
 } from "../services/HttpClientService";
 import { FormControlLabel, Radio, RadioGroup } from "@mui/material";
@@ -76,6 +75,15 @@ function SubjectCreate() {
         }
     };
 
+    const getOfficersID = async () => {
+        let res = await GetOfficerByUID();
+        subjects.OfficerID = res.ID;
+        console.log(subjects.OfficerID);
+        if (res) {
+            setOfficers(res);
+        }
+    };
+
     const getFaculty = async () => {
         let res = await GetFaculty();
         if (res) {
@@ -90,18 +98,11 @@ function SubjectCreate() {
         }
     };
 
-    const getOfficers = async () => {
-        let res = await GetOfficers();
-        if (res) {
-            setOfficers(res);
-        }
-    };
-
     useEffect(() => {
         getTeachers();
         getFaculty();
         getTime();
-        // getOfficers();
+        getOfficersID();
     }, []);
 
     const convertType = (data: string | number | undefined) => {
@@ -120,6 +121,7 @@ function SubjectCreate() {
             TimeID: convertType(subjects.TimeID),
             TeacherID: convertType(subjects.TeacherID),
             FacultyID: convertType(subjects.FacultyID),
+            OfficerID: convertType(subjects.OfficerID),
         };
 
         let res = await Subjects(data);

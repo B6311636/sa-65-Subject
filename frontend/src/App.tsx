@@ -140,7 +140,7 @@ function App() {
                 noWrap
                 sx={{ flexGrow: 1 }}
               >
-                System Analysis and Design 1/65
+                System Analysis and Design 1/65 (ระบบรายวิชา)
               </Typography>
               <Button color="inherit" onClick={signout}>
                 ออกจากระบบ

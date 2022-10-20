@@ -17,6 +17,6 @@ export interface SubjectsInterface {
     Take?: number;
     Faculty?: FacultiesInterface;
     FacultyID?: number; // foreignkey.ID?
-    // Officer?: OfficersInterface;
-    // OfficerID?: number;  // foreignkey.ID?
+    Officer?: OfficersInterface;
+    OfficerID?: number;  // foreignkey.ID?
 }

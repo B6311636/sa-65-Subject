@@ -7,7 +7,7 @@ import (
 type Officer struct {
 	gorm.Model
 	Name     string
-	Email    string `gorm:"uniqueIndex" valid:"email"`
+	Email    string `gorm:"uniqueIndex"`
 	Password string `json:"-"`
 
 	Subject []Subject `gorm:"foreignKey:OfficerID"`
@@ -17,7 +17,7 @@ type Teacher struct {
 	gorm.Model
 	Level string
 	Name  string
-	Email string
+	Email string `gorm:"uniqueIndex"`
 
 	FacultyID *uint
 	Faculty   Faculty

@@ -21,8 +21,8 @@ function Subject() {
         const requestOptions = {
             method: "GET",
             headers: {
-                // Authorization: `Bearer ${localStorage.getItem("token")}`,
-                "Content-Type": "application/json"
+                Authorization: `Bearer ${localStorage.getItem("token")}`,
+                "Content-Type": "application/json",
             },
         };
     
@@ -35,76 +35,20 @@ function Subject() {
                     return false;
                 }
             });
-    
-        // return res;
-        // let res = await GetSubjects();
-        // if (res) {
-        //     setSubjects(res);
-        // }
     };
 
     const columns: GridColDef[] = [
-        { field: "ID", headerName: "ลำดับ", width: 50 },
-        {
-            field: "Code",
-            headerName: "รหัสวิชา",
-            width: 250,
-            // valueFormatter: (params) => params.value.ID,
-        },
-        {
-            field: "Name",
-            headerName: "ชื่อวิชา",
-            width: 250,
-            // valueFormatter: (params) => params.value.Name,
-        },
-        {
-            field: "Credit",
-            headerName: "หน่วยกิต",
-            width: 250,
-            // valueFormatter: (params) => params.value.Credit,
-        },
-        {
-            field: "Section",
-            headerName: "กลุ่ม",
-            width: 250,
-            // valueFormatter: (params) => params.value.Section,
-        },
-        {
-            field: "Day",
-            headerName: "วันที่เรียน",
-            width: 250,
-            // valueFormatter: (params) => params.value.Day,
-        },
-        {
-            field: "Take",
-            headerName: "รับ",
-            width: 250,
-            // valueFormatter: (params) => params.value.Take,
-        },
-        {
-            field: "TeacherID",
-            headerName: "อาจารย์ผู้สอน",
-            width: 150,
-            // valueFormatter: (params) => params.value.Name,
-        },
-        {
-            field: "TimeID",
-            headerName: "ช่วงเวลาที่เปิดสอน",
-            width: 150,
-            // valueFormatter: (params) => params.value.Period,
-        },
-        {
-            field: "FacultyID",
-            headerName: "สำนักวิชา",
-            width: 150,
-            // valueFormatter: (params) => params.value.Name,
-        },
-        {
-            field: "OfficerID",
-            headerName: "ผู้บันทึก",
-            width: 150,
-            // valueFormatter: (params) => params.value.Name,
-        },
+        {field: "ID", headerName: "ลำดับ", width: 50 },
+        {field: "Code", headerName: "รหัสวิชา", width: 250 },
+        {field: "Name", headerName: "ชื่อวิชา", width: 250 },
+        {field: "Credit", headerName: "หน่วยกิต", width: 250 },
+        {field: "Section", headerName: "กลุ่ม", width: 250 },
+        {field: "Day", headerName: "วันที่เรียน", width: 250, },
+        {field: "Take", headerName: "รับ", width: 250 },
+        {field: "TeacherID", headerName: "อาจารย์ผู้สอน", width: 150 },
+        {field: "TimeID", headerName: "ช่วงเวลาที่เปิดสอน", width: 150 },
+        {field: "FacultyID", headerName: "สำนักวิชา", width: 150 },
+        {field: "OfficerID", headerName: "ผู้บันทึก", width: 150 },
     ];
 
     return (
@@ -117,22 +61,12 @@ function Subject() {
                     }}
                 >
                     <Box flexGrow={1}>
-                        <Typography
-                            component="h2"
-                            variant="h6"
-                            color="primary"
-                            gutterBottom
-                        >
+                        <Typography component="h2" variant="h6" color="primary" gutterBottom>
                             ข้อมูลรายวิชา
                         </Typography>
                     </Box>
                     <Box>
-                        <Button
-                            component={RouterLink}
-                            to="/subject/create"
-                            variant="contained"
-                            color="primary"
-                        >
+                        <Button component={RouterLink} to="/subject/create" variant="contained" color="primary">
                             สร้างข้อมูล
                         </Button>
                     </Box>
